@@ -1,0 +1,24 @@
+{
+  "name": "apps",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ian Renyard",
+  "license": "MIT",
+  "dependencies": {
+    "fs-jetpack": "^0.10.5",
+    "fuzzy": "^0.1.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groundcontrolplugins/apps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/groundcontrolplugins/apps/issues"
+  },
+  "homepage": "https://github.com/groundcontrolplugins/apps#readme",
+  "description": ""
+}
