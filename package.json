@@ -14,11 +14,11 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/groundcontrolplugins/apps.git"
+    "url": "git+https://github.com/gc-plugins/apps.git"
   },
   "bugs": {
-    "url": "https://github.com/groundcontrolplugins/apps/issues"
+    "url": "https://github.com/gc-plugins/apps/issues"
   },
-  "homepage": "https://github.com/groundcontrolplugins/apps#readme",
+  "homepage": "https://github.com/gc-plugins/apps#readme",
   "description": ""
 }
