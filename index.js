@@ -70,7 +70,7 @@ switch (process.platform) {
 
 let apps = [];
 
-exports.init = (config) => {
+exports.init = ({config}) => {
     // Clear previous results.
     apps = [];
 
@@ -91,7 +91,7 @@ exports.init = (config) => {
     });
 };
 
-exports.process = (term, stream) => {
+exports.process = ({term, stream}) => {
     let results = [],
         items = {};
 
@@ -121,7 +121,7 @@ exports.process = (term, stream) => {
     }
 };
 
-exports.execute = (key) => {
+exports.execute = ({key}) => {
     return new Promise((resolve, reject) => {
         let success = shell.openItem(key);
 
@@ -134,4 +134,4 @@ exports.execute = (key) => {
     });
 };
 
-exports.prefix = undefined;
+exports.keyword = undefined;
