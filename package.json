@@ -1,5 +1,5 @@
 {
-  "name": "apps",
+  "name": "@gc-plugins/apps",
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
