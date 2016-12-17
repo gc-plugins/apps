@@ -5,9 +5,11 @@ let shell = require('electron').shell,
     path = require('path'),
     jetpack = require('fs-jetpack'),
     fuzzy = require('fuzzy'),
+    {exec} = require('child_process'),
     LOCATIONS,
     OPTS,
-    DESC;
+    ICON_BIN,
+    DESC_FUNC;
 
 switch (process.platform) {
     case 'win32':
@@ -18,8 +20,9 @@ switch (process.platform) {
         OPTS = {
             matching: '**/*.lnk'
         };
+        ICON_BIN = path.resolve(__dirname, 'bin', 'IconExtractor.exe');
         // On Windows, the description should show the parent Programs menu folder, if any.
-        DESC = (loc, item) => {
+        DESC_FUNC = (loc, item) => {
             let description;
 
             // Resolve to an absolute path.
@@ -57,15 +60,16 @@ switch (process.platform) {
             recursive: false
         };
         // On macOS, the description should show the full app path.
-        DESC = (loc, item) => {
+        DESC_FUNC = (loc, item) => {
             return path.resolve(item);
         };
+        ICON_BIN = path.resolve(__dirname, 'bin', 'IconExtractor');
         break;
     default:
         // Unsupported OS.
         LOCATIONS = [];
         OPTS = {};
-        DESC = () => '';
+        DESC_FUNC = () => '';
 }
 
 let apps = [];
@@ -81,9 +85,9 @@ exports.init = ({config}) => {
                 let description = '';
 
                 apps.push({
-                    key: item,
+                    key: path.resolve(item),
                     title: path.parse(item).name,
-                    description: DESC(loc, item),
+                    description: DESC_FUNC(loc, item),
                     icon: undefined
                 });
             });
@@ -108,11 +112,17 @@ exports.process = ({term, stream}) => {
 
     if (results.length) {
         results.forEach((item) => {
-            let id = Math.random();
-
             item = item.original;
 
-            stream.write(item);
+            exec(`${ICON_BIN} "${item.key}"`, (err, stdout) => {
+                if (!err) {
+                    item.icon = 'data:img/png;base64,' + stdout;
+                }
+                else {
+                }
+
+                stream.write(item);
+            });
         });
     }
     else {
