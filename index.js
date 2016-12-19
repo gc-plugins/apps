@@ -80,6 +80,9 @@ exports.init = ({config}) => {
             let results = paths.map((item) => {
                 let description = '';
 
+                // Force path to be absolute.
+                item = path.resolve(item);
+
                 apps.push({
                     key: item,
                     title: path.parse(item).name,
